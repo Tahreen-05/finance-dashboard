@@ -3,14 +3,17 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { useApp } from '../context/AppContext';
 import { useTheme } from '../context/ThemeContext';
 import { getIncomeExpenseOverTime, getSpendingByCategory } from '../utils/transactionUtils';
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#d0ed57', '#a4de6c', '#8dd1e1'];
+import { CATEGORY_COLORS } from '../data/transactions';
+
 const Charts = () => {
     const { state } = useApp();
     const { darkMode: isDark } = useTheme();
     const lineData = getIncomeExpenseOverTime(state.transactions);
     const categoryData = getSpendingByCategory(state.transactions);
+
     const formatCurrency = (value) => `$${value.toLocaleString()}`;
     const gridColor = isDark ? 'rgba(75, 85, 99, 0.25)' : 'rgba(156, 163, 175, 0.2)';
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Area Chart */}
@@ -43,6 +46,8 @@ const Charts = () => {
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
+
+            {/* Doughnut Chart with Category Colors */}
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
                     Spending by Category
@@ -54,14 +59,17 @@ const Charts = () => {
                             dataKey="value"
                             nameKey="name"
                             cx="50%"
-                            cy="50%"
+                            cy="45%"
                             innerRadius={50}
                             outerRadius={90}
                             paddingAngle={4}
                             label={false}
                         >
                             {categoryData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={CATEGORY_COLORS[entry.name] || '#6b7280'}
+                                />
                             ))}
                         </Pie>
                         <Tooltip
@@ -74,7 +82,6 @@ const Charts = () => {
                             layout="horizontal"
                             wrapperStyle={{ color: isDark ? '#F9FAFB' : '#111827', fontSize: '12px', paddingTop: '5px' }}
                             iconType="circle"
-                            formatter={(value) => <span style={{ color: isDark ? '#F9FAFB' : '#111827' }}>{value}</span>}
                         />
                     </PieChart>
                 </ResponsiveContainer>
@@ -82,4 +89,5 @@ const Charts = () => {
         </div>
     );
 };
+
 export default Charts;

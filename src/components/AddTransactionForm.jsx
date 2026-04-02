@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-
 const AddTransactionForm = () => {
     const { state, dispatch } = useApp();
     const [formData, setFormData] = useState({
@@ -8,7 +7,6 @@ const AddTransactionForm = () => {
     });
     const [showForm, setShowForm] = useState(false);
     const categories = ['Food', 'Utilities', 'Entertainment', 'Shopping', 'Salary', 'Freelance', 'Other'];
-
     const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,9 +16,7 @@ const AddTransactionForm = () => {
         setFormData({ description: '', amount: '', category: '', type: 'expense', date: new Date().toISOString().slice(0, 10) });
         setShowForm(false);
     };
-
     if (state.role !== 'admin') return null;
-
     return (
         <div className="mb-6">
             {!showForm ? (
@@ -72,5 +68,4 @@ const AddTransactionForm = () => {
         </div>
     );
 };
-
 export default AddTransactionForm;
