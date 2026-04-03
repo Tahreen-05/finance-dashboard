@@ -1,17 +1,13 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { FaSearch, FaFilter } from 'react-icons/fa';
-
 const TransactionFilters = () => {
     const { state, dispatch } = useApp();
     const { filters } = state;
-
     const handleFilterChange = (key, value) => {
         dispatch({ type: 'SET_FILTERS', payload: { [key]: value } });
     };
-
     const categories = [...new Set(state.transactions.map(t => t.category))];
-
     return (
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 mb-6">
             <div className="flex items-center gap-2 mb-3">
@@ -24,7 +20,7 @@ const TransactionFilters = () => {
                     <select
                         value={filters.type}
                         onChange={(e) => handleFilterChange('type', e.target.value)}
-                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                     >
                         <option value="all">All</option>
                         <option value="income">Income</option>
@@ -36,7 +32,7 @@ const TransactionFilters = () => {
                     <select
                         value={filters.category}
                         onChange={(e) => handleFilterChange('category', e.target.value)}
-                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                     >
                         <option value="all">All</option>
                         {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
@@ -51,7 +47,7 @@ const TransactionFilters = () => {
                             value={filters.search}
                             onChange={(e) => handleFilterChange('search', e.target.value)}
                             placeholder="Description or category"
-                            className="w-full pl-8 border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
+                            className="w-full pl-8 border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white text-gray-800 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                 </div>
@@ -60,8 +56,7 @@ const TransactionFilters = () => {
                     <select
                         value={filters.sortBy}
                         onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
-                    >
+                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500">
                         <option value="date-desc">Date (newest first)</option>
                         <option value="date-asc">Date (oldest first)</option>
                         <option value="amount-desc">Amount (highest first)</option>
@@ -72,5 +67,4 @@ const TransactionFilters = () => {
         </div>
     );
 };
-
 export default TransactionFilters;

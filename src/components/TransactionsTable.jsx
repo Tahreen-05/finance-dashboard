@@ -10,7 +10,7 @@ const TransactionsTable = () => {
     const filteredTransactions = filterTransactions(state.transactions, filters);
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const formatCurrency = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    const formatCurrency = (amount) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
     const handleDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this transaction?')) {
             dispatch({ type: 'DELETE_TRANSACTION', payload: id });

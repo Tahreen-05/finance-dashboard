@@ -1,16 +1,36 @@
-# React + Vite
+# FinView – Smart Finance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive finance dashboard built with React, Tailwind CSS, and Recharts. Track income, expenses, and spending patterns with a clean UI, dark mode, role‑based access, and full data persistence.
+![Overview page](image.png)
+![Transactions page](image-1.png)
+![Insights page](image-2.png)
+## ✨ Features
 
-Currently, two official plugins are available:
+### 📌 Core
+- **Overview** – Summary cards (balance, income, expenses), interactive area chart (income vs expenses), doughnut chart (spending by category), and recent activity feed.
+- **Transactions** – Full transaction list with filtering (type, category, search), sorting (date, amount, description), and **CSV/JSON export**.
+- **Role‑Based UI** – Switch between **Viewer** (read‑only) and **Admin** (add, edit, delete transactions).
+- **Insights** – Top spending category, monthly expense comparison, savings rate, top 3 categories (progress bars), largest expense/income, and monthly income/expenses bar chart.
+- **State Management** – React Context + useReducer with localStorage persistence (transactions & role survive page refresh).
+### 🎨 Enhancements
+- **Dark Mode** – One‑click toggle, saved in localStorage.
+- **Sidebar Navigation** – Collapsible hamburger menu (mobile‑friendly) to switch between Overview, Transactions, and Insights.
+- **Custom Categories** – Admins can add custom categories on‑the‑fly by selecting “Other” in the add transaction form.
+- **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
+### Built With
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* [![React][React.js]][React-url]
+* [![Tailwind CSS][Tailwind]][Tailwind-url]
+* [![Vite][Vite]][Vite-url]
+* [![Recharts][Recharts]][Recharts-url]
+* [![React Icons][React-Icons]][React-Icons-url]
+## 🚀 Getting Started
+```bash
+# 1️⃣ Clone the repository 
+git clone https://github.com/Tahreen-05/finance-dashboard
+cd finance-dashboard
+# 2️⃣ Install dependencies
+npm install
+# 3️⃣ Start the development server
+npm run dev
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

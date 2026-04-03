@@ -6,7 +6,7 @@ const SummaryCards = () => {
     const { state } = useApp();
     const { income, expense, balance } = getSummary(state.transactions);
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
     };
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
