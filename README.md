@@ -18,6 +18,21 @@ A modern, responsive finance dashboard built with React, Tailwind CSS, and Recha
 - **Custom Categories** – Admins can add custom categories on‑the‑fly by selecting “Other” in the add transaction form.
 - **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
 ### Built With
+### Built With
+[![React][React-shield]][React-url]
+[![Tailwind CSS][Tailwind-shield]][Tailwind-url]
+[![Vite][Vite-shield]][Vite-url]
+[![Recharts][Recharts-shield]][Recharts-url]
+[![React Icons][React-Icons-shield]][React-Icons-url]
+## 🚀 Getting Started
+```bash
+# 1️⃣ Clone the repository 
+git clone https://github.com/Tahreen-05/finance-dashboard
+cd finance-dashboard
+# 2️⃣ Install dependencies
+npm install
+# 3️⃣ Start the development server
+npm run dev
 [React-shield]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Tailwind-shield]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
@@ -28,13 +43,3 @@ A modern, responsive finance dashboard built with React, Tailwind CSS, and Recha
 [Recharts-url]: https://recharts.org/
 [React-Icons-shield]: https://img.shields.io/badge/React_Icons-61DAFB?style=for-the-badge&logo=react&logoColor=white
 [React-Icons-url]: https://react-icons.github.io/react-icons/
-## 🚀 Getting Started
-```bash
-# 1️⃣ Clone the repository 
-git clone https://github.com/Tahreen-05/finance-dashboard
-cd finance-dashboard
-# 2️⃣ Install dependencies
-npm install
-# 3️⃣ Start the development server
-npm run dev
-
