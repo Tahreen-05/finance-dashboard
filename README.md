@@ -17,30 +17,31 @@ A modern, responsive finance dashboard built with React, Tailwind CSS, and Recha
 - **Sidebar Navigation** – Collapsible hamburger menu (mobile‑friendly) to switch between Overview, Transactions, and Insights.
 - **Custom Categories** – Admins can add custom categories on‑the‑fly by selecting “Other” in the add transaction form.
 - **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
-### Built With
-### Built With
+## 🛠️ Built With
+
 [![React][React-shield]][React-url]
 [![Tailwind CSS][Tailwind-shield]][Tailwind-url]
 [![Vite][Vite-shield]][Vite-url]
 [![Recharts][Recharts-shield]][Recharts-url]
 [![React Icons][React-Icons-shield]][React-Icons-url]
+
+---
+
 ## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or later)
+- npm or yarn
+
+### Installation
+
 ```bash
-# 1️⃣ Clone the repository 
-git clone https://github.com/Tahreen-05/finance-dashboard
+# 1️⃣ Clone the repository
+git clone https://github.com/Tahreen-05/finance-dashboard.git
 cd finance-dashboard
+
 # 2️⃣ Install dependencies
 npm install
+
 # 3️⃣ Start the development server
 npm run dev
-<!-- SHIELD LINKS -->
-[React-shield]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Tailwind-shield]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
-[Tailwind-url]: https://tailwindcss.com/
-[Vite-shield]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
-[Vite-url]: https://vitejs.dev/
-[Recharts-shield]: https://img.shields.io/badge/Recharts-FF4154?style=for-the-badge&logo=recharts&logoColor=white
-[Recharts-url]: https://recharts.org/
-[React-Icons-shield]: https://img.shields.io/badge/React_Icons-61DAFB?style=for-the-badge&logo=react&logoColor=white
-[React-Icons-url]: https://react-icons.github.io/react-icons/
