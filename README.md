@@ -18,12 +18,16 @@ A modern, responsive finance dashboard built with React, Tailwind CSS, and Recha
 - **Custom Categories** – Admins can add custom categories on‑the‑fly by selecting “Other” in the add transaction form.
 - **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
 ### Built With
-
-* [![React][React.js]][React-url]
-* [![Tailwind CSS][Tailwind]][Tailwind-url]
-* [![Vite][Vite]][Vite-url]
-* [![Recharts][Recharts]][Recharts-url]
-* [![React Icons][React-Icons]][React-Icons-url]
+[React-shield]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Tailwind-shield]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[Vite-shield]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/
+[Recharts-shield]: https://img.shields.io/badge/Recharts-FF4154?style=for-the-badge&logo=recharts&logoColor=white
+[Recharts-url]: https://recharts.org/
+[React-Icons-shield]: https://img.shields.io/badge/React_Icons-61DAFB?style=for-the-badge&logo=react&logoColor=white
+[React-Icons-url]: https://react-icons.github.io/react-icons/
 ## 🚀 Getting Started
 ```bash
 # 1️⃣ Clone the repository 
