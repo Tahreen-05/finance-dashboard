@@ -33,6 +33,7 @@ cd finance-dashboard
 npm install
 # 3️⃣ Start the development server
 npm run dev
+<!-- SHIELD LINKS -->
 [React-shield]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Tailwind-shield]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
