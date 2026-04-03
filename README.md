@@ -19,11 +19,11 @@ A modern, responsive finance dashboard built with React, Tailwind CSS, and Recha
 - **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
 ## 🛠️ Built With
 
-[![React][React-shield]][React-url]
-[![Tailwind CSS][Tailwind-shield]][Tailwind-url]
-[![Vite][Vite-shield]][Vite-url]
-[![Recharts][Recharts-shield]][Recharts-url]
-[![React Icons][React-Icons-shield]][React-Icons-url]
+ ⚛️ Framework | [React.js](https://reactjs.org/) + [Vite](https://vitejs.dev/) |
+| 🎨 Styling | [Tailwind CSS](https://tailwindcss.com/) |
+| 📈 Charts | [Recharts](https://recharts.org/) |
+| 🗃️ State Management | [Zustand](https://zustand-demo.pmnd.rs/) |
+| 🔤 Icons | [Lucide React](https://lucide.dev/) |
 
 ---
 
