@@ -4,10 +4,16 @@
 
 @layer base {
     html {
-        @apply bg-slate-950;
+        color-scheme: light;
+        @apply bg-slate-100 text-slate-900;
+    }
+
+    html.dark {
+        color-scheme: dark;
+        @apply bg-slate-950 text-white;
     }
 
     body {
-        @apply min-h-screen bg-slate-950 text-white;
+        @apply min-h-screen bg-inherit text-inherit;
     }
 }
