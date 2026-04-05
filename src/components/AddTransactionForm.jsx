@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { CATEGORIES } from '../data/transactions';   // ✅ single source
+import { useTheme } from '../context/ThemeContext';
+import { CATEGORIES } from '../data/transactions';
 
 const AddTransactionForm = () => {
     const { state, dispatch } = useApp();
+    const { darkMode } = useTheme();
     const [formData, setFormData] = useState({
         description: '',
         amount: '',
@@ -14,7 +16,6 @@ const AddTransactionForm = () => {
     const [customCategory, setCustomCategory] = useState('');
     const [showForm, setShowForm] = useState(false);
 
-    // ✅ Use the shared CATEGORIES array
     const categories = CATEGORIES;
 
     const handleChange = (e) => {
@@ -88,7 +89,7 @@ const AddTransactionForm = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 required
-                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white  text-gray-800 dark:bg-gray-700 dark:text-white"
+                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
                             />
                         </div>
                         <div>
@@ -152,6 +153,7 @@ const AddTransactionForm = () => {
                                 value={formData.date}
                                 onChange={handleChange}
                                 required
+                                style={{ colorScheme: darkMode ? 'dark' : 'light' }}
                                 className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-900 dark:bg-gray-700 dark:text-white"
                             />
                         </div>
