@@ -128,7 +128,7 @@ const AddTransactionForm = () => {
                                     onChange={handleCustomCategoryChange}
                                     required
                                     placeholder="e.g., Subscriptions, Gifts"
-                                    className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-800ta dark:bg-gray-700 dark:text-white"
+                                    className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                         )}
