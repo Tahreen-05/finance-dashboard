@@ -80,12 +80,6 @@ FinView is a **frontend‑only single‑page application (SPA)** built with Reac
 ### State Flow
 User action → Dispatch action → Reducer updates state → Components re‑render → localStorage sync
 
-### Key Design Decisions
-
-- **Context + useReducer instead of Redux** – Simpler for this scale, centralises complex state logic.
-- **Tailwind CSS with dark mode** – Uses `class` strategy for manual toggle; persists preference.
-- **Client‑side filtering & sorting** – Instant feedback, no network latency.
-
 ---
 
 
@@ -108,11 +102,4 @@ npm install
 
 # 3️⃣ Start the development server
 npm run dev
-📖 Usage
-Role Switcher – Top‑right corner; toggle between Viewer (read‑only) and Admin (add/edit/delete).
 
-Dark Mode – Click the sun/moon icon next to the role switcher.
-
-Transactions – Use filters, search, sort, and export (CSV/JSON) from the Transactions tab.
-
-Insights – Explore monthly trends, top categories, and largest transactions.
