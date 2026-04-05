@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useApp } from '../context/AppContext';
 import { filterTransactions } from '../utils/transactionUtils';
-import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaSort } from 'react-icons/fa';
+import { formatCurrency } from '../utils/transactionUtils';
+import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaSort, FaReceipt } from 'react-icons/fa';
 import { CATEGORY_COLORS } from '../data/transactions';
 import EditTransactionModal from './EditTransactionModal';
+
 const TransactionsTable = () => {
     const { state, dispatch } = useApp();
-    const { filters } = state;
-    const filteredTransactions = filterTransactions(state.transactions, filters);
+    const { filters, transactions } = state;
+
+    // Memoize filtered transactions
+    const filteredTransactions = useMemo(() => {
+        return filterTransactions(transactions, filters);
+    }, [transactions, filters]);
+
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const formatCurrency = (amount) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+
     const handleDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this transaction?')) {
             dispatch({ type: 'DELETE_TRANSACTION', payload: id });
         }
     };
+
     const handleEdit = (transaction) => {
         setEditingTransaction(transaction);
         setIsModalOpen(true);
     };
+
     const handleSort = (field) => {
         const currentSort = filters.sortBy;
         let newSort = '';
@@ -28,12 +37,14 @@ const TransactionsTable = () => {
         else newSort = `${field}-asc`;
         dispatch({ type: 'SET_FILTERS', payload: { sortBy: newSort } });
     };
+
     const getSortIcon = (field) => {
         const current = filters.sortBy;
         if (current === `${field}-asc`) return <FaArrowUp className="inline ml-1 text-xs" />;
         if (current === `${field}-desc`) return <FaArrowDown className="inline ml-1 text-xs" />;
         return <FaSort className="inline ml-1 text-gray-400" />;
     };
+
     return (
         <>
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
@@ -60,8 +71,32 @@ const TransactionsTable = () => {
                         <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                             {filteredTransactions.length === 0 ? (
                                 <tr>
-                                    <td colSpan={state.role === 'admin' ? 6 : 5} className="px-6 py-12 text-center text-sm text-gray-400 dark:text-gray-500">
-                                        ✨ No transactions found. Add one to get started.
+                                    <td colSpan={state.role === 'admin' ? 6 : 5} className="px-6 py-12 text-center">
+                                        <div className="flex flex-col items-center gap-3">
+                                            <FaReceipt className="text-gray-400 dark:text-gray-500 text-5xl" />
+                                            <p className="text-gray-500 dark:text-gray-400 text-base">
+                                                ✨ No transactions found.
+                                            </p>
+                                            {state.role === 'admin' && (
+                                                <button
+                                                    onClick={() => {
+                                                        const addBtn = document.getElementById('add-transaction-btn');
+                                                        if (addBtn) {
+                                                            addBtn.click();
+                                                            addBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                        }
+                                                    }}
+                                                    className="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition"
+                                                >
+                                                    + Add your first transaction
+                                                </button>
+                                            )}
+                                            {state.role !== 'admin' && (
+                                                <p className="text-sm text-gray-400 dark:text-gray-500">
+                                                    No data to display.
+                                                </p>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ) : (
@@ -116,4 +151,5 @@ const TransactionsTable = () => {
         </>
     );
 };
+
 export default TransactionsTable;

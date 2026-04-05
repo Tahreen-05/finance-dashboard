@@ -1,10 +1,8 @@
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { FaSun, FaMoon } from 'react-icons/fa';
-
 const DarkModeToggle = () => {
-    const { darkMode, toggleDarkMode } = useTheme();
-
+    const { darkMode, toggleDarkMode } = useTheme()
     return (
         <button
             onClick={toggleDarkMode}
@@ -15,5 +13,4 @@ const DarkModeToggle = () => {
         </button>
     );
 };
-
 export default DarkModeToggle;

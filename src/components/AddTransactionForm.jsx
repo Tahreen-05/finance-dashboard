@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { CATEGORIES } from '../data/transactions';   // ✅ single source
 
 const AddTransactionForm = () => {
     const { state, dispatch } = useApp();
@@ -13,12 +14,12 @@ const AddTransactionForm = () => {
     const [customCategory, setCustomCategory] = useState('');
     const [showForm, setShowForm] = useState(false);
 
-    const categories = ['Food', 'Utilities', 'Entertainment', 'Shopping', 'Salary', 'Freelance', 'Other'];
+    // ✅ Use the shared CATEGORIES array
+    const categories = CATEGORIES;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        // Reset custom category if user changes away from "Other"
         if (name === 'category' && value !== 'Other') {
             setCustomCategory('');
         }
@@ -69,6 +70,7 @@ const AddTransactionForm = () => {
         <div className="mb-6">
             {!showForm ? (
                 <button
+                    id="add-transaction-btn"
                     onClick={() => setShowForm(true)}
                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
                 >
@@ -86,7 +88,7 @@ const AddTransactionForm = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 required
-                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-900 dark:bg-gray-700 dark:text-white"
+                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white  text-gray-800 dark:bg-gray-700 dark:text-white"
                             />
                         </div>
                         <div>
@@ -98,7 +100,7 @@ const AddTransactionForm = () => {
                                 onChange={handleChange}
                                 required
                                 step="0.01"
-                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-900 dark:bg-gray-700 dark:text-white"
+                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
                             />
                         </div>
                         <div>
@@ -114,6 +116,7 @@ const AddTransactionForm = () => {
                                 {categories.map(cat => (
                                     <option key={cat} value={cat}>{cat}</option>
                                 ))}
+                                <option value="Other">+ Other (custom)</option>
                             </select>
                         </div>
                         {formData.category === 'Other' && (
@@ -125,7 +128,7 @@ const AddTransactionForm = () => {
                                     onChange={handleCustomCategoryChange}
                                     required
                                     placeholder="e.g., Subscriptions, Gifts"
-                                    className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 dark:text-white"
+                                    className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 bg-white text-gray-800ta dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                         )}

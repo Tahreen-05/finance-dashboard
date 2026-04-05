@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useApp } from '../context/AppContext';
 import { useTheme } from '../context/ThemeContext';
@@ -8,8 +8,10 @@ import { CATEGORY_COLORS } from '../data/transactions';
 const Charts = () => {
     const { state } = useApp();
     const { darkMode: isDark } = useTheme();
-    const lineData = getIncomeExpenseOverTime(state.transactions);
-    const categoryData = getSpendingByCategory(state.transactions);
+
+    // Memoize data transformations
+    const lineData = useMemo(() => getIncomeExpenseOverTime(state.transactions), [state.transactions]);
+    const categoryData = useMemo(() => getSpendingByCategory(state.transactions), [state.transactions]);
 
     // Custom currency formatter for Rupees (without Intl.NumberFormat options)
     const formatRupee = (value) => {
@@ -30,9 +32,9 @@ const Charts = () => {
 
     const gridColor = isDark ? 'rgba(75, 85, 99, 0.25)' : 'rgba(156, 163, 175, 0.2)';
 
-    // Calculate max value for domain
-    const maxValue = Math.max(0, ...lineData.flatMap(d => [d.income, d.expenses]));
-    const yDomain = [0, maxValue === 0 ? 100000 : maxValue * 1.1];
+    // Memoize max value and domain
+    const maxValue = useMemo(() => Math.max(0, ...lineData.flatMap(d => [d.income, d.expenses])), [lineData]);
+    const yDomain = useMemo(() => [0, maxValue === 0 ? 100000 : maxValue * 1.1], [maxValue]);
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -73,7 +75,7 @@ const Charts = () => {
                 </ResponsiveContainer>
             </div>
 
-            {/* Doughnut Chart - unchanged except tooltip currency */}
+            {/* Doughnut Chart */}
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
                     Spending by Category

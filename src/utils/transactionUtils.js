@@ -29,13 +29,11 @@ export const filterTransactions = (transactions, filters) => {
     }
     return filtered;
 };
-
 export const getSummary = (transactions) => {
     const income = transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
     const expense = transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
     return { income, expense, balance: income - expense };
 };
-
 export const getIncomeExpenseOverTime = (transactions) => {
     const monthly = new Map(); // Use Map for clarity
     transactions.forEach(t => {
@@ -56,7 +54,6 @@ export const getIncomeExpenseOverTime = (transactions) => {
             label: new Date(m.month + '-01').toLocaleString('default', { month: 'short', year: '2-digit' })
         }));
 };
-
 export const getSpendingByCategory = (transactions) => {
     const expenses = transactions.filter(t => t.type === 'expense');
     const categoryTotals = {};
@@ -65,25 +62,21 @@ export const getSpendingByCategory = (transactions) => {
     });
     return Object.entries(categoryTotals).map(([name, value]) => ({ name, value }));
 };
-
-// Custom currency formatter for Indian Rupees.
 export const formatCurrency = (amount) => {
-    const formatter = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-    });
-    if (amount === undefined || amount === null || isNaN(amount)) return formatter.format(0);
-    return formatter.format(amount);
+    if (amount === undefined || amount === null || isNaN(amount)) return '₹0.00';
+    const sign = amount < 0 ? '-' : '';
+    const absAmount = Math.abs(amount);
+    const rupees = Math.floor(absAmount);
+    const paise = Math.round((absAmount - rupees) * 100);
+    const formattedRupees = rupees.toLocaleString('en-IN');
+    const formattedPaise = paise.toString().padStart(2, '0');
+    return `${sign}₹${formattedRupees}.${formattedPaise}`;
 };
-
 export const formatShortDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 };
-
-// Monthly data for bar chart (last N months)
+// Monthly data for bar chart
 export const getMonthlyBarData = (transactions, monthsCount = 6) => {
     const monthlyMap = {};
     transactions.forEach(t => {
@@ -100,7 +93,6 @@ export const getMonthlyBarData = (transactions, monthsCount = 6) => {
         expenses: m.expenses,
     }));
 };
-
 export const getInsights = (transactions) => {
     if (!transactions.length) {
         return {
@@ -108,10 +100,14 @@ export const getInsights = (transactions) => {
             monthlyExpenses: { current: 0, previous: 0, change: '0.0' },
             totalExpenses: 0,
             totalIncome: 0,
+            messages: ['📊 Add some transactions to see personalized insights.'],
         };
     }
+
     const expenses = transactions.filter(t => t.type === 'expense');
-    // Highest category
+    const incomes = transactions.filter(t => t.type === 'income');
+
+    // Highest spending category
     const categoryTotals = {};
     expenses.forEach(t => {
         categoryTotals[t.category] = (categoryTotals[t.category] || 0) + t.amount;
@@ -121,6 +117,7 @@ export const getInsights = (transactions) => {
         if (amt > highestAmount) { highestAmount = amt; highestCategory = cat; }
     }
 
+    // Monthly based on latest transaction date
     const latestDate = new Date(Math.max(...transactions.map(t => new Date(t.date))));
     const currentYear = latestDate.getFullYear();
     const currentMonth = latestDate.getMonth();
@@ -137,10 +134,53 @@ export const getInsights = (transactions) => {
     let monthlyChange = 0;
     if (prevMonthExpenses > 0) monthlyChange = ((currentMonthExpenses - prevMonthExpenses) / prevMonthExpenses) * 100;
     else if (currentMonthExpenses > 0) monthlyChange = 100;
+
+    const totalExpenses = expenses.reduce((s, t) => s + t.amount, 0);
+    const totalIncome = incomes.reduce((s, t) => s + t.amount, 0);
+    const savingsRate = totalIncome > 0 ? ((totalIncome - totalExpenses) / totalIncome * 100).toFixed(1) : 0;
+
+    // Build friendly messages
+    const messages = [];
+
+    if (monthlyChange > 5) {
+        messages.push(`📈 Your spending increased by ${monthlyChange.toFixed(0)}% compared to last month. Consider reviewing your budget.`);
+    } else if (monthlyChange < -5) {
+        messages.push(`🎉 Great job! Your spending decreased by ${Math.abs(monthlyChange).toFixed(0)}% from last month.`);
+    } else if (Math.abs(monthlyChange) <= 5 && monthlyChange !== 0) {
+        messages.push(`👍 Your spending is stable (${monthlyChange.toFixed(0)}% change from last month).`);
+    }
+
+    if (highestCategory) {
+        const categoryPercent = ((highestAmount / totalExpenses) * 100).toFixed(0);
+        messages.push(`🍽️ Your top spending category is ${highestCategory} – ${categoryPercent}% of total expenses.`);
+    }
+
+    if (savingsRate > 20) {
+        messages.push(`💰 Excellent savings rate of ${savingsRate}%! Keep it up.`);
+    } else if (savingsRate < 0) {
+        messages.push(`⚠️ Your expenses exceed income. Try to reduce spending or increase income.`);
+    } else if (savingsRate < 10 && savingsRate >= 0) {
+        messages.push(`📉 Your savings rate is ${savingsRate}%. Small changes can make a big difference.`);
+    }
+
+    if (totalExpenses > 0 && totalIncome > 0) {
+        const ratio = totalExpenses / totalIncome;
+        if (ratio > 0.9) messages.push(`🔥 You're spending over 90% of your income. Time to review non‑essentials.`);
+        else if (ratio < 0.5) messages.push(`✨ You're spending less than half your income – that's very healthy!`);
+    }
+
+    // Add a tip if there are many small transactions
+    const smallTransactions = expenses.filter(t => t.amount < 500).length;
+    if (smallTransactions > 5) {
+        messages.push(`💡 You have ${smallTransactions} small expenses under ₹500. Tracking them could reveal savings.`);
+    }
+
     return {
         highestCategory: highestCategory ? { name: highestCategory, amount: highestAmount } : null,
         monthlyExpenses: { current: currentMonthExpenses, previous: prevMonthExpenses, change: monthlyChange.toFixed(1) },
-        totalExpenses: expenses.reduce((s, t) => s + t.amount, 0),
-        totalIncome: transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0),
+        totalExpenses,
+        totalIncome,
+        savingsRate: parseFloat(savingsRate),
+        messages,
     };
 };

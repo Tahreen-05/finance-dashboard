@@ -10,7 +10,6 @@ const RecentActivities = ({ setActiveTab }) => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 6);
     const { darkMode: isDark } = useTheme();
-
     return (
         <div className={`rounded-2xl p-5 ${isDark ? 'bg-[#161b22] border border-white/[0.06]' : 'bg-white border border-slate-200 shadow-sm'}`}>
             <div className="flex items-center justify-between mb-4">
@@ -71,5 +70,4 @@ const RecentActivities = ({ setActiveTab }) => {
         </div>
     );
 };
-
 export default RecentActivities;

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useApp } from '../context/AppContext';
 import SummaryCards from '../components/SummaryCards';
 import Charts from '../components/Charts';
 import TransactionFilters from '../components/TransactionFilters';
@@ -11,14 +12,28 @@ import Sidebar from '../components/Sidebar';
 import RecentActivities from '../components/RecentActivities';
 import ExportButton from '../components/ExportButton';
 import { FaBars, FaTimes } from 'react-icons/fa';
+
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { state } = useApp(); // to access role
+
+    // Auto-scroll to top on tab change
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [activeTab]);
+
+    // Scroll to top on initial load
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
+
     const tabNames = {
         overview: 'Overview',
         transactions: 'Transactions',
         insights: 'Insights',
     };
+
     const renderContent = () => {
         switch (activeTab) {
             case 'overview':
@@ -32,9 +47,11 @@ const Dashboard = () => {
             case 'transactions':
                 return (
                     <>
-                        <div className="flex flex-wrap justify-between items-center gap-3 mb-4">
-                            <AddTransactionForm />
-                            <ExportButton />
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                            {state.role === 'admin' && <AddTransactionForm />}
+                            <div className="ml-auto">
+                                <ExportButton />
+                            </div>
                         </div>
                         <TransactionFilters />
                         <TransactionsTable />
@@ -46,6 +63,7 @@ const Dashboard = () => {
                 return null;
         }
     };
+
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <Sidebar
@@ -77,12 +95,11 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-
-
                     {renderContent()}
                 </div>
             </div>
         </div>
     );
-}
+};
+
 export default Dashboard;

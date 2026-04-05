@@ -58,10 +58,24 @@ const Insights = ({ compact = false }) => {
 
     return (
         <div className="space-y-6">
-            {/* Header */}
-
-
+            {/* Smart Insights Messages */}
+            {insights.messages && insights.messages.length > 0 && (
+                <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+                        <FaChartLine className="text-indigo-500" /> Smart Insights
+                    </h4>
+                    <div className="space-y-2">
+                        {insights.messages.map((msg, idx) => (
+                            <div key={idx} className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-indigo-500">•</span>
+                                <span>{msg}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
             {/* Three stat cards */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {insights.highestCategory && (
                     <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">

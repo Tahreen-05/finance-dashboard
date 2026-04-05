@@ -2,7 +2,7 @@
 
   <img src="https://img.shields.io/badge/FinView-Smart%20Finance%20Dashboard-E8820C?style=for-the-badge&logo=react&logoColor=white" alt="FinView Banner" />
 
-  <h3 align="center">💰 FinView -  Finance Dashboard</h3>
+  <h3 align="center">💰 FinView - Finance Dashboard</h3>
 
   <p align="center">
     A modern, responsive finance dashboard built with React, Tailwind CSS, and Recharts.<br/>
@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
     <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
     <img src="https://img.shields.io/badge/Recharts-FF6B6B?style=for-the-badge&logo=chartdotjs&logoColor=white" />
-    <img src="https://img.shields.io/badge/Lucide-433E38?style=for-the-badge&logo=npm&logoColor=white" />
+    <img src="https://img.shields.io/badge/React_Icons-61DAFB?style=for-the-badge&logo=react&logoColor=white" />
   </p>
 
 </div>
@@ -62,14 +62,32 @@
 ## 🛠️ Built With
 
 | Layer | Technology |
-|---|---|
+|-------|------------|
 | ⚛️ Framework | [React.js](https://reactjs.org/) + [Vite](https://vitejs.dev/) |
 | 🎨 Styling | [Tailwind CSS](https://tailwindcss.com/) |
 | 📈 Charts | [Recharts](https://recharts.org/) |
 | 🗃️ State Management | React Context + useReducer |
-| 🔤 Icons | [Lucide React](https://lucide.dev/) |
+| 🔤 Icons | [React Icons](https://react-icons.github.io/react-icons/) |
 
 ---
+
+## 🧠 Architecture & Design
+
+### High‑Level Overview
+
+FinView is a **frontend‑only single‑page application (SPA)** built with React (Vite), Tailwind CSS, and Recharts. All data is stored locally in the browser's `localStorage` – no backend or external database is required.
+
+### State Flow
+User action → Dispatch action → Reducer updates state → Components re‑render → localStorage sync
+
+### Key Design Decisions
+
+- **Context + useReducer instead of Redux** – Simpler for this scale, centralises complex state logic.
+- **Tailwind CSS with dark mode** – Uses `class` strategy for manual toggle; persists preference.
+- **Client‑side filtering & sorting** – Instant feedback, no network latency.
+
+---
+
 
 ## 🚀 Getting Started
 
@@ -90,5 +108,11 @@ npm install
 
 # 3️⃣ Start the development server
 npm run dev
-```
+📖 Usage
+Role Switcher – Top‑right corner; toggle between Viewer (read‑only) and Admin (add/edit/delete).
 
+Dark Mode – Click the sun/moon icon next to the role switcher.
+
+Transactions – Use filters, search, sort, and export (CSV/JSON) from the Transactions tab.
+
+Insights – Explore monthly trends, top categories, and largest transactions.
