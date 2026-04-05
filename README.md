@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://img.shields.io/badge/FinView-Smart%20Finance%20Dashboard-E8820C?style=for-the-badge&logo=react&logoColor=white" alt="FinView Banner" />
+  <img src="https://img.shields.io/badge/FinView-t%20Finance%20Dashboard-E8820C?style=for-the-badge&logo=react&logoColor=white" alt="FinView Banner" />
 
   <h3 align="center">💰 FinView - Finance Dashboard</h3>
 
